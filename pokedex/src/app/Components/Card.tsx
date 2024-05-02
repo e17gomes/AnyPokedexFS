@@ -2,9 +2,9 @@
 import axios from "axios";
 
 import Image from "next/image";
-import { useState, useEffect, ChangeEvent, memo } from "react";
+import { useState, useEffect, ChangeEvent} from "react";
 
-function getPokes() {
+function GetPokes() {
   const [count, setCount] = useState(1);
   const [poke, setPoke] = useState('')
   const [namePoke, setnamePoke] = useState(''); //desconsidera
@@ -15,6 +15,7 @@ function getPokes() {
     //call the function get
     () => {
       getPoke()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count]
   )
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,11 +35,13 @@ function getPokes() {
     try {
 
       const response = await axios.get(url);
+      parseInt(response.data.id)
+      console.log(typeof response.data.id)
       setCount(response.data.id)
-      console.log('count '+ count)
+     // console.log('count '+ count)
       setImgPoke(response.data.sprites.front_default);
       setnamePoke(response.data.name);
-      console.log(response.data.id + " ID")
+     // console.log(response.data.id + " ID")
       
 
     } catch (error) {
@@ -59,7 +62,7 @@ function getPokes() {
         <p className="select-none">GIF de carregamento</p>
       ) : (
         <>
-          <form onSubmit={handleSearch}> {/* Adiciona o manipulador de evento onSubmit */}
+          <form onSubmit={handleSearch}>
             <input className="bg-red-300" type="search" onChange={handleGetVal} />
           </form>
           <button onClick={getPoke}>fetch</button>
@@ -82,4 +85,4 @@ function getPokes() {
   );
 }
 
-export default memo(getPokes)
+export default GetPokes

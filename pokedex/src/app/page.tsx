@@ -1,12 +1,11 @@
-import Image from "next/image";
-import ModeToggle from "./Components/Toggle";
 import Card from "./Components/Card";
+import Nav from "./Components/NavBar";
 
 
 export default function Home() {
   return (
-    <main className="grid grid-cols-1">
-      <ModeToggle />
+    <main >
+      <Nav/>
       <Card/>
     </main> 
   );
