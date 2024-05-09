@@ -2,7 +2,7 @@
 import axios from "axios";
 
 import Image from "next/image";
-import { useState, useEffect, ChangeEvent} from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
 function GetPokes() {
   const [count, setCount] = useState(1);
@@ -12,10 +12,10 @@ function GetPokes() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(
-    //call the function get
+    //call the function getPoke 
     () => {
       getPoke()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count]
   )
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,16 +38,17 @@ function GetPokes() {
       parseInt(response.data.id)
       console.log(typeof response.data.id)
       setCount(response.data.id)
-     // console.log('count '+ count)
+      // console.log('count '+ count)
       setImgPoke(response.data.sprites.front_default);
       setnamePoke(response.data.name);
-     // console.log(response.data.id + " ID")
-      
+      // console.log(response.data.id + " ID")
+
 
     } catch (error) {
       console.error("Erro ao obter Pokémon:", error);
     } finally {
       setTimeout(() => {
+        //testando aqui
         setIsLoading(false)
       }, 700);
       setPoke('')
@@ -58,29 +59,39 @@ function GetPokes() {
   return (
 
     <>
-      {isLoading ? (
-        <p className="select-none">GIF de carregamento</p>
-      ) : (
-        <>
-          <form onSubmit={handleSearch}>
-            <input className="bg-red-300" type="search" onChange={handleGetVal} />
-          </form>
-          <button onClick={getPoke}>fetch</button>
-          <div className="flex space-x-5 select-none">
-            <p onClick={handleCountPrev}>Prev {'<'}</p>
-            <p>{namePoke}</p>
 
-            <Image
-              src={imgPoke||"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/100.png"}
-              alt={namePoke}
-              width={50}
-              height={50}
-              priority={true}
-            />
-            <p onClick={handleCountNext}>Next {'>'}</p>
+
+
+      {isLoading ? (
+       
+          <div className="loader-container">
+            <div className="loader"></div>
           </div>
-        </>
-      )}
+        
+      ) :
+
+
+        (
+          <>
+            <form onSubmit={handleSearch}>
+              <input className="bg-gray-300 rounded p-2 text-center" placeholder="insert here a pokemon " type="search" onChange={handleGetVal} />
+            </form>
+            <button onClick={getPoke}>fetch</button>
+            <div className="flex space-x-5 select-none">
+              <p onClick={handleCountPrev}>Prev {'<'}</p>
+              <p>{namePoke}</p>
+
+              <Image
+                src={imgPoke || "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/100.png"}
+                alt={namePoke}
+                width={50}
+                height={50}
+                priority={true}
+              />
+              <p onClick={handleCountNext}>Next {'>'}</p>
+            </div>
+          </>
+        )}
     </>
   );
 }
