@@ -1,6 +1,7 @@
 'use client'
 import axios from "axios";
-
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import Image from "next/image";
 import { useState, useEffect, ChangeEvent } from "react";
 
@@ -9,7 +10,7 @@ function GetPokes() {
   const [poke, setPoke] = useState('')
   const [namePoke, setnamePoke] = useState(''); //desconsidera
   const [imgPoke, setImgPoke] = useState(''); //desconsidera
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(
     //call the function getPoke 
@@ -47,10 +48,10 @@ function GetPokes() {
     } catch (error) {
       console.error("Erro ao obter Pokémon:", error);
     } finally {
-      setTimeout(() => {
-        //testando aqui
-        setIsLoading(false)
-      }, 700);
+      // setTimeout(() => {
+      //   //testando aqui
+      // }, 700);
+      setIsLoading(false)
       setPoke('')
 
     }
@@ -63,35 +64,62 @@ function GetPokes() {
 
 
       {isLoading ? (
-       
-          <div className="loader-container">
-            <div className="loader"></div>
-          </div>
-        
+
+        <div className="flex items-center justify-center h-96">
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
+        </div>
       ) :
 
 
         (
-          <>
-            <form onSubmit={handleSearch}>
-              <input className="bg-gray-300 rounded p-2 text-center" placeholder="insert here a pokemon " type="search" onChange={handleGetVal} />
+          <section className="space-y-10 m-auto">
+            <form onSubmit={handleSearch} className="bg-gray-300 rounded p-2 text-center w-fit m-auto">
+              <input className="bg-inherit outline-none dark:text-gray-700" placeholder="insert here a pokemon " type="search" onChange={handleGetVal} />
+              <button onClick={getPoke}>🍳</button>
             </form>
-            <button onClick={getPoke}>fetch</button>
-            <div className="flex space-x-5 select-none">
-              <p onClick={handleCountPrev}>Prev {'<'}</p>
-              <p>{namePoke}</p>
-
-              <Image
-                src={imgPoke || "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/100.png"}
-                alt={namePoke}
-                width={50}
-                height={50}
-                priority={true}
-              />
-              <p onClick={handleCountNext}>Next {'>'}</p>
+            <div className="flex items-center justify-center space-x-3">
+              <Button variant="outline" onClick={handleCountPrev}>
+                <p className=" h-4 w-4 flex items-center"> {'<-'} </p>
+                
+              </Button>
+              <Card className="w-full max-w-sm rounded-lg overflow-hidden shadow-lg">
+                <div className="relative">
+                  <img
+                    alt="Pokemon"
+                    className="m-auto pt-10 w-48 h-48 object-cover "
+                    height={80}
+                    src={imgPoke || "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"}
+                    style={{
+                      aspectRatio: "500/300",
+                      objectFit: "cover",
+                    }}
+                    width={300}
+                  />
+                  <div className="absolute top-4 left-4 bg-gray-900 text-white px-3 py-1 rounded-full text-xs font-medium">
+                    Fire
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{namePoke.toUpperCase()}</h3>
+                  <div className="flex items-center space-x-2 mb-4">
+                    <div className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">Fire</div>
+                    <div className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">Flying</div>
+                  </div>
+                  <p className="text-gray-500 text-sm">
+                    Charizard is a Fire/Flying type Pokémon. It is the final evolution of Charmander.
+                  </p>
+                </div>
+              </Card>
+              <Button variant="outline" onClick={handleCountNext}>
+                <p className=" h-4 w-4 flex items-center"> {"->"} </p>
+              </Button>
             </div>
-          </>
+          </section>
         )}
+
+
+
+
     </>
   );
 }
