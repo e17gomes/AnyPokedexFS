@@ -37,12 +37,13 @@ function GetPokes() {
 
       const response = await axios.get(url);
       parseInt(response.data.id)
-      console.log(typeof response.data.id)
+     
       setCount(response.data.id)
       // console.log('count '+ count)
       setImgPoke(response.data.sprites.front_default);
       setnamePoke(response.data.name);
       // console.log(response.data.id + " ID")
+      console.log(response.data.types[0].type.name)
 
 
     } catch (error) {
@@ -65,9 +66,9 @@ function GetPokes() {
 
       {isLoading ? (
 
-
+ //On Load
 <section className="space-y-10 m-auto">
-<form onSubmit={handleSearch} className="bg-gray-300 rounded p-2 text-center w-fit m-auto">
+<form onSubmit={handleSearch} className="bg-gray-200 rounded p-2 text-center w-fit m-auto  animate-spin">
   <input className="bg-inherit outline-none dark:text-gray-700" placeholder="insert here a pokemon " type="search" onChange={handleGetVal} />
   <button onClick={getPoke}>🍳</button>
 </form>
@@ -77,10 +78,11 @@ function GetPokes() {
     
   </Button>
   <Card className="w-full max-w-sm rounded-lg overflow-hidden shadow-lg">
+
+    {/* Loader */}
     <div className="relative">
-      
     <div className="flex items-center justify-center h-64">
-          <div className="w-12 h-12 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-gray-200 border-t-gray-900 rounded-full animate-spin " />
         </div>
       <div className="absolute top-4 left-4 bg-gray-900 text-white px-3 py-1 rounded-full text-xs font-medium">
         Fire
@@ -92,7 +94,7 @@ function GetPokes() {
         <div className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">Fire</div>
         <div className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">Flying</div>
       </div>
-      <p className="text-gray-500 text-sm">
+      <p className="text-gray-500 text-sm ">
         Charizard is a Fire/Flying type Pokémon. It is the final evolution of Charmander.
       </p>
     </div>
@@ -104,12 +106,16 @@ function GetPokes() {
 </section>
 
       )
+
+
        :
 
 
-        (
-          <section className="space-y-10 m-auto">
-            <form onSubmit={handleSearch} className="bg-gray-300 rounded p-2 text-center w-fit m-auto">
+        ( //Load Complete
+          <section className="space-y-5 m-auto">
+             <h1 className="text-6xl text-center font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-t from-red-600 to-neutral-200 py-4 underline decoration-red-200  decoration-wavy decoration-from-font  "> Welcome to AnyDex</h1>
+             
+            <form onSubmit={handleSearch} className="bg-gray-200 rounded p-2 text-center w-fit m-auto">
               <input className="bg-inherit outline-none dark:text-gray-700" placeholder="insert here a pokemon " type="search" onChange={handleGetVal} />
               <button onClick={getPoke}>🍳</button>
             </form>
@@ -122,7 +128,7 @@ function GetPokes() {
                 <div className="relative">
                   <img
                     alt="Pokemon"
-                    className="m-auto pt-10 w-48 h-48 object-cover "
+                    className="m-auto pt-10 w-48 h-48 object-cover  "
                     height={80}
                     src={imgPoke || "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"}
                     style={{
