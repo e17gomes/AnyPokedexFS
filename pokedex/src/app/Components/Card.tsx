@@ -115,13 +115,13 @@ function GetPokes() {
                 <div className={`absolute top-4 left-4  text-white px-3 py-1 rounded-full text-xs font-medium`}>
                   {Types.map((stypes: any, index: number) => {
                     const backgroundColor = colorsType[stypes.type.name.toLowerCase()] || 'bg-gray-400';
-                    return (<div className={`${backgroundColor} text-gray-50 px-3 py-1 rounded-full text-xs font-medium m-1 shadow shadow-black`} key={index}>{primeiraLetraMaiuscula(stypes.type.name)}</div>)
+                    return (<div className={`${backgroundColor} text-gray-50 px-3 py-1 rounded-full text-xs font-medium m-1 shadow shadow-black text-center`} key={index}>{primeiraLetraMaiuscula(stypes.type.name)}</div>)
                   })}
                 </div>
               </div>
 
               <div className="p-4">
-                <h3 className={`text-2xl font-bold mb-2 shadow-inner shadow-slate-300 rounded-full text-center ${Types[0] ? colorsType[Types[0].type.name.toLowerCase()] : 'bg-gray-400'}`}>
+                <h3 className={`text-2xl font-bold mb-2 shadow-black shadow-inner dark:shadow-slate-300 rounded-full text-center ${Types[0] ? colorsType[Types[0].type.name.toLowerCase()] : 'bg-gray-400'}`}>
                   {primeiraLetraMaiuscula(namePoke)}
                 </h3>
                 <ul className="grid grid-cols-2">
