@@ -86,7 +86,7 @@ function GetPokes() {
       ) : (
         // Load Complete
         <section className="space-y-5 m-auto mt-0">
-          <h1 className="text-6xl text-center font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-t from-red-600 to-neutral-200 py-5">Welcome to AnyDex</h1>
+          <h1 className={`text-6xl text-center font-bold relative z-20 text-transparent bg-clip-text ${Types[0] ? colorsType[Types[0].type.name.toLowerCase()] : 'bg-gray-400'} mb-12`}>Welcome to AnyDex</h1>
 
           <form onSubmit={handleSearch} className="bg-gray-200 rounded p-2 text-center w-fit m-auto flex items-center">
             <input className="bg-inherit outline-none dark:text-gray-700" placeholder="insert here a pokemon" type="search" onChange={handleGetVal} />
@@ -98,8 +98,8 @@ function GetPokes() {
               <CircleArrowLeft />
             </Button>
 
-            <Card className="w-full max-w-sm rounded-lg overflow-hidden shadow-lg ">
-              <div className="relative bg-gray-50">
+            <Card className="w-full max-w-sm rounded-lg overflow-hidden shadow-lg border-gray-950 dark:border-gray-50">
+              <div className="relative">
                 <img
                   alt="Pokemon"
                   className="m-auto pt-10 w-48 h-48 object-cover"
