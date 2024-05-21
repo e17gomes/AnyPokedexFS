@@ -6,6 +6,7 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { CircleArrowLeft, CircleArrowRight, Search } from "lucide-react";
 import { colorsType } from "./colorType";
 
+
 function GetPokes() {
   const [count, setCount] = useState(1);
   const [poke, setPoke] = useState('')
@@ -17,9 +18,8 @@ function GetPokes() {
 
   {
     Types.map((stypes: { type: { name: string } }, index: number) => {
-      // Acesse a cor correspondente ao tipo atual de Pokémon diretamente do objeto colorsType
+      // Acesse a cor correspondente ao tipo atual de Pokémon diretamente do colorsType
       const backgroundColor = colorsType[stypes.type.name.toLowerCase()] || 'bg-gray-400';
-      // Restante do seu código...
     })
   }
   useEffect(
@@ -90,7 +90,7 @@ function GetPokes() {
 
           <form onSubmit={handleSearch} className="bg-gray-200 rounded p-2 text-center w-fit m-auto flex items-center">
             <input className="bg-inherit outline-none dark:text-gray-700" placeholder="insert here a pokemon" type="search" onChange={handleGetVal} />
-            <button onClick={getPoke}><Search className="w-5 text-gray" /></button>
+            <button onClick={getPoke}><Search className="w-5 text-gray-700" /></button>
           </form>
 
           <div className="flex items-center justify-center space-x-3">
