@@ -44,14 +44,14 @@ export const HeroHighlight = ({
         style={{
           WebkitMaskImage: useMotionTemplate`
             radial-gradient(
-              80px circle at ${mouseX}px ${mouseY}px,
+              180px circle at ${mouseX}px ${mouseY}px,
               black 0%,
               transparent 100%
             )
           `,
           maskImage: useMotionTemplate`
             radial-gradient(
-              80px circle at ${mouseX}px ${mouseY}px,
+              180px circle at ${mouseX}px ${mouseY}px,
               black 0%,
               transparent 100%
             )

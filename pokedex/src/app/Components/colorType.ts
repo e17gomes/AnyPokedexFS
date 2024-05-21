@@ -17,7 +17,7 @@ export interface ColorType {
     bug: 'bg-green-600',
     rock: 'bg-gray-600',
     ghost: 'bg-purple-700',
-    dragon: 'bg-purple-800',
+    dragon: 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500',
     dark: 'bg-gray-800',
     steel: 'bg-gray-500',
     fairy: 'bg-pink-300',
